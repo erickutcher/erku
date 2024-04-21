@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="AdjustOverscan" extends="Group">
+	<interface>
+		<field id="menu_state" type="integer" value="-1" alwaysnotify="true" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/Options/AdjustOverscan/AdjustOverscan.brs" />
+</component>

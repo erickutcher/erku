@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="VODInfo" extends="Group">
+	<interface>
+		<field id="menu_state" type="integer" value="-1" alwaysnotify="true" />
+		<field id="content" type="node" value="invalid" />
+		<field id="details_content" type="node" value="invalid" onChange="OnDetailsContentChange" alwaysnotify="true" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/VODInfo/VODInfo.brs" />
+</component>

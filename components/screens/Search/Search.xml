@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Search" extends="Group">
+	<interface>
+		<field id="menu_state" type="integer" value="-1" alwaysnotify="true" />
+		<field id="search_type" type="integer" value="0" onChange="OnSearchTypeChange" alwaysnotify="true" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/Search/Search.brs" />
+</component>

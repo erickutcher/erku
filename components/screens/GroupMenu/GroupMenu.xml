@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="GroupMenu" extends="Group">
+	<interface>
+		<field id="menu_state" type="integer" value="-1" alwaysnotify="true" />
+		<field id="content" type="node" value="invalid" onChange="OnContentChange" alwaysnotify="true" />
+		<field id="content_index" type="integer" value="-1" alwaysnotify="true" />
+		<field id="content_offset" type="integer" value="-1" />
+		<field id="group_content_type" type="integer" value="0" />
+		<field id="update_content" type="bool" value="false" />
+		<field id="details_content" type="node" value="invalid" onChange="OnDetailsContentChange" alwaysnotify="true" />
+		<field id="enter_group_content" type="node" value="invalid" onChange="OnEnterGroupContentChange" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/GroupMenu/GroupMenu.brs" />
+</component>

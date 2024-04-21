@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<component name="Home" extends="Scene">
+	<interface>
+		<field id="group_content" type="node" value="invalid" onChange="OnLoadGroupContent" alwaysnotify="true" />
+		<field id="content" type="node" value="invalid" onChange="OnLoadContent" />
+		<field id="epg_content" type="node" value="invalid" onChange="OnLoadEPGContent" alwaysnotify="true" />
+		<field id="details_content" type="node" value="invalid" onChange="OnLoadDetailsContent" alwaysnotify="true" />
+		<field id="channel_content" type="node" value="invalid" onChange="OnLoadChannelContent" alwaysnotify="true" />
+		<field id="tv_is_off" type="bool" value="false" onChange="OnTVIsOff" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/Home/Home.brs" />
+	<children>
+		<VideoPlayer id="VideoPlayer" />
+		<MainMenu id="MainMenu" />
+		<Search id="Search" />
+		<GroupMenu id="GroupMenu" />
+		<ChannelMenu id="ChannelMenu" />
+		<ChannelGuide id="ChannelGuide" />
+		<VODMenu id="VODMenu" />
+		<Options id="Options" />
+	</children>
+</component>

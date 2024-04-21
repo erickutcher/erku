@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="VideoPlayer" extends="Rectangle">
+	<interface>
+		<field id="video" type="node" value="invalid" />
+		<field id="content" type="node" value="invalid" onChange="OnContentChange" />
+		<field id="resume" type="bool" value="false" onChange="OnResume" />
+		<field id="details_content" type="node" value="invalid" onChange="OnDetailsContentChange" alwaysnotify="true" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/VideoPlayer/VideoPlayer.brs" />
+	<children>
+		<Video id="Video" />
+		<Rectangle id="Background" />
+		<Rectangle id="ProgressBar" />
+		<VideoInfo id="VideoInfo" />
+		<VideoOptions id="VideoOptions" />
+	</children>
+</component>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="DetailsContentNode" extends="Node">
+    <interface>
+        <field id="Title" type="string" value="" />
+        <field id="Runtime" type="integer" value="0" />
+        <field id="Rating" type="string" value="" />
+        <field id="ReleaseDate" type="string" value="" />
+        <field id="EndDate" type="string" value="" />
+        <field id="Seasons" type="integer" value="0" />
+        <field id="Episodes" type="integer" value="0" />
+        <field id="HDPosterUrl" type="string" value="" />
+        <field id="Description" type="string" value="" />
+        <field id="Genres" type="stringarray" value="" />
+        <field id="Directors" type="stringarray" value="" />
+        <field id="Actors" type="node" value="" />
+    </interface>
+</component>

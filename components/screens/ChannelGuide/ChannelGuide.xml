@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="ChannelGuide" extends="Group">
+	<interface>
+		<field id="menu_state" type="integer" value="-1" alwaysnotify="true" />
+		<field id="content" type="node" value="invalid" onChange="OnContentChange" alwaysnotify="true" />
+		<field id="content_index" type="integer" value="-1" alwaysnotify="true" />
+		<field id="video_player" type="node" value="invalid" />
+		<field id="content_offset" type="integer" value="-1" />
+		<field id="update_content" type="bool" value="false" />
+	</interface>
+	<script type="text/brightscript" uri="pkg:/components/screens/ChannelGuide/ChannelGuide.brs" />
+</component>
