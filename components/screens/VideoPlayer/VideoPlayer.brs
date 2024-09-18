@@ -189,7 +189,17 @@ sub OnContentChange()
 			m.vod_info.content = m.top.content
 
 			m.global.loading_details = 2	' Loading Video Player details.
-			m.global.details_name = m.vod_info.content.Title
+			if m.global.current_content_type = 2 and m.vod_info.content.Episode <> -1	' TV Shows
+			'{
+				m.global.details_name = m.vod_info.content.SeriesTitle
+				m.global.details_season = m.vod_info.content.Season.ToStr()
+				m.global.details_episode = m.vod_info.content.Episode.ToStr()
+			'}
+			else' if m.global.current_content_type = 1	' Movies
+			'{
+				m.global.details_name = m.vod_info.content.Title
+			'}
+			end if
 			m.global.details_year = m.vod_info.content.Year
 			m.global.load_details = true
 		'}
@@ -383,7 +393,17 @@ function OnKeyEvent( key as string, press as boolean ) as boolean
 						m.vod_info.content = m.top.content
 
 						m.global.loading_details = 2	' Loading Video Player details.
-						m.global.details_name = m.vod_info.content.Title
+						if m.global.current_content_type = 2 and m.vod_info.content.Episode <> -1	' TV Shows
+						'{
+							m.global.details_name = m.vod_info.content.SeriesTitle
+							m.global.details_season = m.vod_info.content.Season.ToStr()
+							m.global.details_episode = m.vod_info.content.Episode.ToStr()
+						'}
+						else' if m.global.current_content_type = 1	' Movies
+						'{
+							m.global.details_name = m.vod_info.content.Title
+						'}
+						end if
 						m.global.details_year = m.vod_info.content.Year
 						m.global.load_details = true
 					'}
