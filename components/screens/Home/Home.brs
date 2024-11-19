@@ -435,8 +435,6 @@ sub OnLoadGroupContent()
 '{
 	m.global.loading_content = false
 
-	m.group_menu.group_content_type = 0	' Regular group content.
-
 	if m.loading_channel = true
 	'{
 		m.loading_channel = false
@@ -470,7 +468,6 @@ sub OnLoadGroupContent()
 
 		m.loading_search_content = true
 
-		m.group_menu.group_content_type = 1	' Search group content.
 		m.group_menu.content = m.top.group_content
 
 		' Now that we have the parent group set, perform the search request.

@@ -188,7 +188,7 @@ end sub
 
 sub OnVisible()
 '{
-	if m.top.visible = true and (m.top.content = invalid or m.top.content.GetChildCount() = 0)
+	if m.top.visible = true and ( m.top.content = invalid or m.top.content.GetChildCount() = 0 )
 	'{
 		if m.global.loading_content = true
 		'{
@@ -419,22 +419,6 @@ sub OnContentChange()
 	if m.top.content <> invalid
 	'{
 		m.visible_rows = m.top.content.GetChildCount()
-
-		if m.top.group_content_type = 1	' Search group content.
-		'{
-			if m.current_content_type = 0	' Live TV
-			'{
-				m.selected_row_index = 2
-				m.content_index = 2
-			'}
-			else if m.current_content_type = 1 or m.current_content_type = 2	' Movies/TV Shows
-			'{
-				m.selected_row_index = 3
-				m.content_index = 3
-			'}
-			end if
-		'}
-		end if
 
 		' The item we selected was a group.
 		if m.top.content.group_id <> m.current_group_id

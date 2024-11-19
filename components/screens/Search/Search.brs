@@ -291,15 +291,21 @@ sub OnKeyboardDialogButtonSelection()
 
 		m.last_search_strings[ m.top.search_type ] = m.keyboard_dialog.text
 
-		m.global.current_content_type = m.top.search_type
-
 		m.global.search_query = m.keyboard_dialog.text
+
+		' Retain the same offset if we haven't changed content types.
+		if m.global.current_content_type <> m.top.search_type
+		'{
+			m.global.current_content_type = m.top.search_type
+
+			m.global.group_content_offset = 0
+		'}
+		end if
 
 		' We load the parent group (Live TV, Movies, TV Shows) of the Search group first.
 		' This way we'll be able to navigate back through the menus as if we had entered them normally.
 		m.global.loading_content = true
 		m.global.group_id = 0
-		m.global.group_content_offset = 0
 		m.global.load_group_chunk = true
 	'}
 	end if
