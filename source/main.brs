@@ -231,7 +231,7 @@ sub RunUserInterface()
 			'}
 			else if field = "load_epg_chunk"
 			'{
-				LoadEPG( m.global.channel_sort_type, m.global.channel_content_group_id, m.global.epg_content_limit, m.global.epg_content_offset )
+				LoadEPG( m.global.channel_sort_type, m.global.channel_content_group_id, m.global.epg_content_limit, m.global.epg_content_offset, m.global.search_query )
 			'}
 			else if field = "load_details"
 			'{
@@ -629,15 +629,24 @@ sub LoadContent( content_type as integer, sort_type as integer, id as integer, c
 '}
 end sub
 
-sub LoadEPG( sort_type as integer, id as integer, content_limit as integer, content_offset as integer )
+sub LoadEPG( sort_type as integer, id as integer, content_limit as integer, content_offset as integer, search_query as string )
 '{
 	got_content = false
 
 	url = m.global.feed_url + "/get_epg.php?sort=" + sort_type.ToStr() + "&id=" + id.ToStr() + "&limit=" + content_limit.ToStr() + "&offset=" + content_offset.ToStr()
 
 	transfer = CreateObject( "roUrlTransfer" )
+
+	' Special ID for the Search group.
+	if id = 5
+	'{
+		url = url + "&query=" + transfer.Escape( search_query )
+	'}
+	end if
+
 	transfer.EnablePeerVerification( false )
 	transfer.SetURL( url )
+
 	json = transfer.GetToString()
 	if json <> ""
 	'{

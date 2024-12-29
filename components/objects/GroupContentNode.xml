@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="GroupContentNode" extends="Node">
-    <interface>
-        <field id="total" type="integer" value="0" />
-        <field id="group_id" type="integer" value="-1" />
-        <field id="type" type="integer" value="0" />
-        <field id="Title" type="string" value="" />
-        <field id="SeriesTitle" type="string" value="" />
-        <field id="Season" type="integer" value="-1" />
-        <field id="Year" type="string" value="" />
-    </interface>
+	<interface>
+		<field id="total" type="integer" value="0" />
+		<field id="group_id" type="integer" value="-1" />
+		<field id="type" type="integer" value="0" />
+		<field id="Title" type="string" value="" />
+		<field id="SeriesTitle" type="string" value="" />
+		<field id="Season" type="integer" value="-1" />
+		<field id="Year" type="string" value="" />
+	</interface>
 </component>

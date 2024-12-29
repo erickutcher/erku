@@ -111,8 +111,6 @@ sub Init()
 
 	m.top.ObserveField( "visible", "OnVisible" )
 
-	m.global.ObserveField( "favorite_status", "OnFavoriteStatusChanged" )
-
 	m.saving_favorite = false
 '}
 end sub
@@ -145,6 +143,8 @@ sub OnVisible()
 '{
 	if m.top.visible = true
 	'{
+		m.global.ObserveField( "favorite_status", "OnFavoriteStatusChanged" )
+
 		if m.top.content <> invalid
 		'{
 			m.channel_name.text = m.top.content.Title
@@ -165,6 +165,10 @@ sub OnVisible()
 			m.add_remove_favorites_background.width = m.add_remove_favorites_selected.width
 		'}
 		end if
+	'}
+	else
+	'{
+		m.global.UnobserveField( "favorite_status" )
 	'}
 	end if
 '}

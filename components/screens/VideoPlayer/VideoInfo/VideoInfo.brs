@@ -59,7 +59,7 @@ sub Init()
 		m.channel_number.width = channel_logo_width
 		m.channel_number.numLines = 1
 		m.channel_number.translation = [ 20, 20 + channel_logo_height + 20 ]
-        m.channel_number.horizAlign = "center"
+		m.channel_number.horizAlign = "center"
 		row.AppendChild( m.channel_number )
 
 		' Program Name
@@ -610,10 +610,10 @@ sub UpdateProgramInfo()
 		m.program_name.text = program_name_text
 		m.program_description.text = program_description_text
 
-        if m.channel_logo.uri <> poster_url
-        '{
-            m.channel_logo.loadingBitmapUri = m.channel_logo.uri
-            if poster_url = ""
+		if m.channel_logo.uri <> poster_url
+		'{
+			m.channel_logo.loadingBitmapUri = m.channel_logo.uri
+			if poster_url = ""
 			'{
 				if m.current_content_type = 0
 				'{
@@ -627,8 +627,8 @@ sub UpdateProgramInfo()
 			'}
 			end if
 			m.channel_logo.uri = poster_url
-        '}
-        end if
+		'}
+		end if
 
 		m.channel_number.text = channel_number_text
 	'}

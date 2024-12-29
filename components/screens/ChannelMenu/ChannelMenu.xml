@@ -6,6 +6,8 @@
 		<field id="content_index" type="integer" value="-1" alwaysnotify="true" />
 		<field id="content_offset" type="integer" value="-1" />
 		<field id="update_content" type="bool" value="false" />
+		<field id="refresh" type="bool" value="false" />
+		<field id="reload_content" type="bool" value="false" onChange="OnReloadConent" />
 	</interface>
 	<script type="text/brightscript" uri="pkg:/components/screens/ChannelMenu/ChannelMenu.brs" />
 </component>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="ActorContentNode" extends="Node">
-    <interface>
-        <field id="Name" type="string" value="" />
-        <field id="CharacterName" type="string" value="" />
-        <field id="HDPosterUrl" type="string" value="" />
-    </interface>
+	<interface>
+		<field id="Name" type="string" value="" />
+		<field id="CharacterName" type="string" value="" />
+		<field id="HDPosterUrl" type="string" value="" />
+	</interface>
 </component>

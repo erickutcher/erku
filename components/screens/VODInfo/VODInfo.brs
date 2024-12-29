@@ -371,25 +371,25 @@ sub OnDetailsContentChange()
 		m.container.uri = poster_url
 
 		poster_url = m.top.details_content.HDPosterUrl
-        if m.vod_logo.uri <> poster_url
-        '{
-            m.vod_logo.loadingBitmapUri = m.vod_logo.uri
-            if poster_url = ""
-            '{
+		if m.vod_logo.uri <> poster_url
+		'{
+			m.vod_logo.loadingBitmapUri = m.vod_logo.uri
+			if poster_url = ""
+			'{
 				if m.top.content <> invalid and m.top.content.HDPosterUrl <> ""
 				'{
 					poster_url =  m.top.content.HDPosterUrl
 				'}
 				else
 				'{
-                	poster_url = "pkg:/images/no-poster.png"
+					poster_url = "pkg:/images/no-poster.png"
 				'}
 				end if
-            '}
-            end if
-            m.vod_logo.uri = poster_url
-        '}
-        end if
+			'}
+			end if
+			m.vod_logo.uri = poster_url
+		'}
+		end if
 
 		release_info = []
 		if m.top.details_content.ReleaseDate <> ""

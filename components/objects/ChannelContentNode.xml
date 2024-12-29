@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="ChannelContentNode" extends="Node">
-    <interface>
-        <field id="total" type="integer" value="0" />
-        <field id="channel_id" type="integer" value="-1" />
-        <field id="group_id" type="integer" value="-1" />
-        <field id="Number" type="integer" value="-1" />
-        <field id="Episode" type="integer" value="-1" />
-        <field id="Season" type="integer" value="-1" />
-        <field id="Title" type="string" value="" />
-        <field id="SeriesTitle" type="string" value="" />
-        <field id="SeasonTitle" type="string" value="" />
-        <field id="HDPosterUrl" type="string" value="" />
-        <field id="Url" type="string" value="" />
-        <field id="StreamFormat" type="string" value="" />
-        <field id="Year" type="string" value="" />
-        <field id="SeriesYear" type="string" value="" />
-        <field id="SeasonYear" type="string" value="" />
-        <field id="HttpHeaders" type="array" value="" />
-        <field id="Favorite" type="bool" value="false" />
-        <field id="SubtitleConfig" type="assocarray" value="" />
-    </interface>
+	<interface>
+		<field id="total" type="integer" value="0" />
+		<field id="channel_id" type="integer" value="-1" />
+		<field id="group_id" type="integer" value="-1" />
+		<field id="Number" type="integer" value="-1" />
+		<field id="Episode" type="integer" value="-1" />
+		<field id="Season" type="integer" value="-1" />
+		<field id="Title" type="string" value="" />
+		<field id="SeriesTitle" type="string" value="" />
+		<field id="SeasonTitle" type="string" value="" />
+		<field id="HDPosterUrl" type="string" value="" />
+		<field id="Url" type="string" value="" />
+		<field id="StreamFormat" type="string" value="" />
+		<field id="Year" type="string" value="" />
+		<field id="SeriesYear" type="string" value="" />
+		<field id="SeasonYear" type="string" value="" />
+		<field id="HttpHeaders" type="array" value="" />
+		<field id="Favorite" type="bool" value="false" />
+		<field id="SubtitleConfig" type="assocarray" value="" />
+	</interface>
 </component>

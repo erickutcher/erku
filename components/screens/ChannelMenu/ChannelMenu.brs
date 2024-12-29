@@ -16,6 +16,9 @@ sub Init()
 	m.content_index_end = 0
 	m.loading_content = false
 
+	m.reloading_content = false
+	m.last_content_total = 0
+
 	m.scroll_delta = 0
 
 	m.selected_row_index = 0
@@ -105,6 +108,29 @@ sub Init()
 '}
 end sub
 
+sub OnReloadConent()
+'{
+	if m.top.reload_content = true
+	'{
+		m.top.reload_content = false
+
+		if m.top.content <> invalid
+		'{
+			m.reloading_content = true
+
+			m.last_content_total = m.top.content.total
+
+			m.top.content_offset = ( m.content_index + m.top.content.total - INT( m.global.content_limit / 2 ) ) mod m.top.content.total
+
+			m.loading_content = true
+			m.top.update_content = true
+		'}
+		end if
+	'}
+	end if
+'}
+end sub
+
 sub OnAddRemoveFavoriteStateChanged()
 '{
 	if m.channel_options.content <> invalid
@@ -112,27 +138,27 @@ sub OnAddRemoveFavoriteStateChanged()
 		if m.channel_options.add_remove_favorite_state = 0	' Remove Favorite
 		'{
 			m.channel_options.content.Favorite = false
-
-			' Remove the channel and update the menu if we're in the Favorites menu (group_id will be 2).
-			if m.top.content <> invalid and m.top.content.group_id = 2
-			'{
-				m.top.content.RemoveChild( m.channel_options.content )
-				m.channel_options.content = invalid
-
-				m.top.content.total--
-				if m.content_index >= m.top.content.total
-				'{
-					m.content_index--
-				'}
-				end if
-
-				OnContentChange()
-			'}
-			end if
 		'}
 		else if m.channel_options.add_remove_favorite_state = 1	' Add Favorite
 		'{
 			m.channel_options.content.Favorite = true
+		'}
+		end if
+
+		m.channel_options.content = invalid
+
+		if m.top.content <> invalid
+		'{
+			m.reloading_content = true
+
+			m.last_content_total = m.top.content.total
+
+			m.top.refresh = true
+
+			m.top.content_offset = ( m.content_index + m.top.content.total - INT( m.global.content_limit / 2 ) ) mod m.top.content.total
+
+			m.loading_content = true
+			m.top.update_content = true
 		'}
 		end if
 	'}
@@ -222,7 +248,15 @@ sub SetRowText( content_index as integer, row_index as integer )
 		content = m.top.content.GetChild( content_index )
 
 		m.container.GetChild( row_index ).GetChild( 0 ).text = content.Title
-		m.container.GetChild( row_index ).GetChild( 1 ).text = content.Number.ToStr()
+		if m.top.content.GetChild( content_index ).Favorite = true
+		'{
+			m.container.GetChild( row_index ).GetChild( 1 ).text = "[" + content.Number.ToStr() + "]"
+		'}
+		else
+		'{
+			m.container.GetChild( row_index ).GetChild( 1 ).text = content.Number.ToStr()
+		'}
+		end if
 	'}
 	else
 	'{
@@ -238,12 +272,34 @@ sub OnContentChange()
 	' We've loaded a group, but don't know it's length yet. Reset the content_index.
 	if m.global.content_offset < 0
 	'{
-		m.content_index = 0
+		if m.reloading_content = false
+		'{
+			m.content_index = 0
+		'}
+		end if
 	'}
 	end if
 
 	if m.top.content <> invalid
 	'{
+		selected_row_index = 0
+
+		if m.top.content.total < m.last_content_total
+		'{
+			if m.content_index > 0
+			'{
+				m.content_index--
+			'}
+			end if
+
+			if m.selected_row_index > 0
+			'{
+				selected_row_index = m.selected_row_index - 1
+			'}
+			end if
+		'}
+		end if
+
 		m.visible_rows = m.top.content.GetChildCount()'m.top.content.total
 
 		if m.visible_rows > 0
@@ -285,7 +341,7 @@ sub OnContentChange()
 				'{
 					m.container.GetChild( m.selected_row_index ).color = m.row_color
 
-					m.selected_row_index = 0
+					m.selected_row_index = selected_row_index
 				'}
 				end if
 
@@ -354,6 +410,10 @@ sub OnContentChange()
 		m.container.GetChild( INT( m.max_visible_rows / 2 ) ).GetChild( 1 ).text = ""
 	'}
 	end if
+
+	m.last_content_total = 0
+
+	m.reloading_content = false
 
 	m.loading_content = false
 '}

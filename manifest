@@ -2,7 +2,7 @@
 title=Erku
 major_version=1
 minor_version=0
-build_version=2
+build_version=3
 
 ## Channel Assets
 mm_icon_focus_hd=pkg:/images/icon_focus_hd.png

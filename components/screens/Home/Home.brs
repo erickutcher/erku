@@ -49,7 +49,6 @@ sub Init()
 	m.video_player.video.ObserveField( "state", "OnVideoStateChange" )
 	m.video_player.video.ObserveField( "globalCaptionMode", "OnGlobalCaptionModeChange" )
 
-
 	''''''''''''''''''''''''
 
 	m.channel_number_timer = CreateObject( "roSGNode", "Timer" )
@@ -502,21 +501,57 @@ sub OnLoadContent()
 
 		if m.current_main_menu_content_index = 1
 		'{
-			m.channel_menu.content = m.top.content
-			m.channel_guide.content = invalid
-
-			if m.show_channel_menu = true
+			' Have we changed groups? If so, then clear the guide.
+			clear_guide = false
+			if m.channel_menu.content <> invalid and m.channel_menu.content.group_id <> m.top.content.group_id
 			'{
-				m.channel_menu.menu_state = 1	' Show
+				clear_guide = true
 			'}
-			else
+			end if
+
+			m.channel_menu.content = m.top.content
+
+			' The channel guide is not open and the channel menu doesn't want us to refresh the channel guide.
+			if m.channel_guide.menu_state <> 1 and m.channel_menu.refresh = false
 			'{
-				if m.load_channel_type = 0	' Resuming Channel
+				if clear_guide = true
 				'{
-					m.current_menu = m.channel_menu
-					m.video_player.SetFocus( true )
+					m.channel_guide.content = invalid
 				'}
 				end if
+
+				if m.show_channel_menu = true
+				'{
+					m.channel_menu.menu_state = 1	' Show
+				'}
+				else
+				'{
+					if m.load_channel_type = 0	' Resuming Channel
+					'{
+						m.current_menu = m.channel_menu
+						m.video_player.SetFocus( true )
+					'}
+					end if
+				'}
+				end if
+			'}
+			else	' If the channel guide is open, then the last opened menu will have been the channel menu.
+			'{
+				' Does the channel menu want us to refresh the channel guide?
+				if m.channel_menu.refresh = true
+				'{
+					m.channel_menu.refresh = false
+
+					' Reload the channel guide content only if it has already been loaded.
+					if m.global.loading_epg = false and m.channel_guide.content <> invalid
+					'{
+						m.channel_guide.reload_content = true
+					'}
+					end if
+				'}
+				end if
+
+				m.current_menu = m.channel_menu
 			'}
 			end if
 		'}
@@ -562,6 +597,14 @@ sub OnLoadEPGContent()
 	m.global.loading_epg = false
 
 	m.channel_guide.content = m.top.epg_content
+
+	if m.channel_guide.refresh = true
+	'{
+		m.channel_guide.refresh = false
+
+		m.channel_menu.reload_content = true
+	'}
+	end if
 '}
 end sub
 
@@ -685,7 +728,7 @@ sub OnVideoStateChange()
 '{
 	if m.video_player.video.state = "stopped" or m.video_player.video.state = "finished" or m.video_player.video.state = "error"
 	'{
-		' If the channel guide is opened and we play a video that stops/fails, then we want to keep the guide open and not display the previously opened menu.
+		' If the channel guide is open and we play a video that stops/fails, then we want to keep the guide open and not display the previously opened menu.
 		if m.channel_guide.menu_state <> 1
 		'{
 			m.current_menu.menu_state = 1	' Show
@@ -809,7 +852,7 @@ sub HandleChannelNumberInput()
 	channel_number = m.channel_number.text.ToInt()
 
 	' Only switch if the channel number is different.
-	if channel_number <> m.global.channel_number
+	if channel_number <> m.global.channel_number or m.video_player.video.state = "none" or m.video_player.video.state = "stopped" or m.video_player.video.state = "finished" or m.video_player.video.state = "error"
 	'{
 		channel_group_id = 1	' All group
 
@@ -849,17 +892,13 @@ function OnKeyEvent( key as string, press as boolean ) as boolean
 		'}
 		else if key = "play"
 		'{
-			if m.video_player.video <> invalid
+			if m.video_player.video.state = "playing"
 			'{
-				if m.video_player.video.state = "playing"
-				'{
-					m.video_player.video.control = "pause"
-				'}
-				else if m.video_player.video.state = "paused"
-				'{
-					m.video_player.video.control = "resume"
-				'}
-				end if
+				m.video_player.video.control = "pause"
+			'}
+			else if m.video_player.video.state = "paused"
+			'{
+				m.video_player.video.control = "resume"
 			'}
 			end if
 		'}
@@ -871,7 +910,7 @@ function OnKeyEvent( key as string, press as boolean ) as boolean
 		'{
 			if m.current_main_menu_content_index = 1 ' Only show the guide if it's for Live TV.
 			'{
-				m.current_menu.visible = false
+				m.current_menu.visible = false	' Retain the current menu's state.
 
 				if m.global.loading_epg = false and m.channel_guide.content = invalid
 				'{
